@@ -1,95 +1,69 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+
+import { Button } from "antd";
+import Image from "next/image";
+import styles from "./page.module.scss";
+import { Progress } from "antd";
+
+import Banner from "@/components/Banner/banner";
+import ProjectTabs from "@/components/ProjectTabs/projecttabs";
+
+import { useMediaQuery } from "react-responsive";
+
+import { TabContent } from "@/components/ProjectTabs/tabcontent";
 
 export default function Home() {
+  const isMobile = useMediaQuery({
+    query: "(max-width: 45em)",
+  });
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className={styles.container}>
+      <div className={styles.page_top}>
+        <div className={styles.heading_1}>
+          <h1>
+            WeWork <span>+</span> Salesforce
+          </h1>
+        </div>
+        <Button
+          style={{ backgroundColor: "#00B686", borderColor: "#00B686" }}
+          type="primary"
+          size={isMobile ? "middle" : "large"}
+        >
+          Publish/Share
+        </Button>
+      </div>
+
+      <div className="banner-image">
+        <Banner />
+      </div>
+
+      <div className={styles.heading_2}>
+        <h2>Project Scope Recap</h2>
+        <div className={styles.progess_bar}>
+          <div className={styles.progess_label}>
+            <span className={styles.progress_heading}>Mutual Action Plan</span>
+            <span className={styles.progress_percentage}>3%</span>
+          </div>
+          <Progress
+            percent={3}
+            steps={17}
+            showInfo={false}
+            strokeColor={"#00B686"}
+            trailColor={"#d3d7d7"}
+            strokeWidth={10}
+            strokeLinecap="round"
+            size={isMobile ? 6 : 10}
+            className={styles.ant_progress_inner}
+          />
         </div>
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="project_scope_tabs">
+        <ProjectTabs />
       </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <TabContent />
     </main>
-  )
+  );
 }
